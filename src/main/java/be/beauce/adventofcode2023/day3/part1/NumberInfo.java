@@ -5,7 +5,7 @@ public record NumberInfo(
         int lineIndex,
         int startIndex
 ) {
-    public boolean indexBetween(int lineIndex, int symbolIndex) {
+    public boolean isAdjacent(int lineIndex, int symbolIndex) {
 //        System.out.println("is number %s on line %s: start of number between %s and %s in line %s for symbol %s"
 //                .formatted(number, lineIndex, symbolIndex + 1, symbolIndex - 1, lineIndex, symbolIndex));
         int endNumberIndex = startIndex + String.valueOf(number).length() - 1;

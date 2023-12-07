@@ -1,5 +1,6 @@
 package be.beauce.adventofcode2023.day3.part1;
 
+import be.beauce.adventofcode2023.day3.Input;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,7 @@ class EngineSchematicTest {
 
         @Test
         void get_sum_of_adjacent_numbers() {
-            int sum = engineSchematic.getNumbersSum();
-            assertThat(sum).isEqualTo(1);
+            assertThat(engineSchematic.getNumbersSum()).isEqualTo(1);
         }
     }
 
@@ -41,8 +41,7 @@ class EngineSchematicTest {
 
         @Test
         void get_sum_of_adjacent_numbers() {
-            int sum = engineSchematic.getNumbersSum();
-            assertThat(sum).isEqualTo(3);
+            assertThat(engineSchematic.getNumbersSum()).isEqualTo(3);
         }
     }
 
@@ -59,8 +58,7 @@ class EngineSchematicTest {
 
         @Test
         void get_sum_of_adjacent_numbers() {
-            int sum = engineSchematic.getNumbersSum();
-            assertThat(sum).isEqualTo(23);
+            assertThat(engineSchematic.getNumbersSum()).isEqualTo(23);
         }
     }
 
@@ -71,15 +69,14 @@ class EngineSchematicTest {
         @BeforeEach
         void setUp() {
             engineSchematic = new EngineSchematic("""
-                .1.10..
+                .1..10..
                 20*5..
                 """);
         }
 
         @Test
         void get_sum_of_adjacent_numbers() {
-            int sum = engineSchematic.getNumbersSum();
-            assertThat(sum).isEqualTo(36);
+            assertThat(engineSchematic.getNumbersSum()).isEqualTo(26);
         }
     }
 
@@ -89,7 +86,7 @@ class EngineSchematicTest {
         @BeforeEach
         void setUp() {
             engineSchematic = new EngineSchematic("""
-                1..10..
+                1...10.
                 20*.5..
                 50..300
                 """);
@@ -97,9 +94,19 @@ class EngineSchematicTest {
 
         @Test
         void get_sum_of_adjacent_numbers() {
-            int sum = engineSchematic.getNumbersSum();
-            assertThat(sum).isEqualTo(80);
+            assertThat(engineSchematic.getNumbersSum()).isEqualTo(70);
         }
+    }
+
+    @Test
+    void case_with_4_numbers() {
+        engineSchematic = new EngineSchematic("""
+                1.10..
+                5*55..
+                5000..
+                """);
+        var sum = engineSchematic.getNumbersSum();
+        assertThat(sum).isEqualTo(5071);
     }
 
     @Nested
@@ -107,13 +114,42 @@ class EngineSchematicTest {
 
         @BeforeEach
         void setUp() {
-            engineSchematic = new EngineSchematic(Input.text);
+            engineSchematic = new EngineSchematic("""
+                    467..114..
+                    ...*......
+                    .%35..633.
+                    ......#...
+                    617*......
+                    .....+.58.
+                    ..592.....
+                    ......755.
+                    ...$.*....
+                    .664.598..
+                    """);
         }
 
         @Test
         void get_sum_of_adjacent_numbers() {
-            int sum = engineSchematic.getNumbersSum();
-            assertThat(sum).isEqualTo(525946);
+            assertThat(engineSchematic.getNumbersSum()).isEqualTo(4361);
+        }
+    }
+
+    @Nested
+    class Given_another_large_input {
+
+        @BeforeEach
+        void setUp() {
+            engineSchematic = new EngineSchematic("""
+                    .....766.......................*......68.....#..477...$...428....209*.......*...265.......191......*........268...=....81...618#........=...
+                    ........*847.....661.474......624.........................................223...#....*...........74...................*.....................
+                    .................*......%.574.....................976.475*618.@.....=..27.........975.280.....*......=...............13.....757-.......112..
+                    .....721.........748.........*......392&.........../..........636.911......................359.......857.656....72-.....................*...
+                    """);
+        }
+
+        @Test
+        void get_sum_of_adjacent_numbers() {
+            assertThat(engineSchematic.getNumbersSum()).isEqualTo(9334);
         }
     }
 

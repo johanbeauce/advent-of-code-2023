@@ -1,5 +1,7 @@
 package be.beauce.adventofcode2023.day3.part1;
 
+import be.beauce.adventofcode2023.day3.Input;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -16,10 +18,6 @@ public class EngineSchematic {
             String line = split[lineIndex];
             this.lines.add(new Line(lineIndex, line));
         }
-    }
-
-    public List<Line> lines() {
-        return lines;
     }
 
     public Numbers getNumbers(int lineIndex) {
@@ -50,7 +48,7 @@ public class EngineSchematic {
         Set<NumberInfo> adjacentNumbers = new HashSet<>();
         Numbers numbers = getNumbers(lineIndex);
         for (NumberInfo numberInfo : numbers.asList()) {
-            if (numberInfo.indexBetween(lineIndex, symbolInfo.startIndex())) {
+            if (numberInfo.isAdjacent(lineIndex, symbolInfo.startIndex())) {
                 adjacentNumbers.add(numberInfo);
             }
         }
@@ -61,22 +59,48 @@ public class EngineSchematic {
         return lineIndex >= 0 && lineIndex < lines.size();
     }
 
-    public int getNumbersSum() {
+    public long getNumbersSum() {
         Set<NumberInfo> adjacentNumbers = new HashSet<>();
         for (int lineIndex = 0; lineIndex < lines.size(); lineIndex++) {
             Symbols symbols = getSymbols(lineIndex);
-            System.out.println("line %s: %s".formatted(lineIndex, symbols.asList()));
+//            System.out.println("line %s: \n\t%s".formatted(lineIndex, symbols.asList()));
             for (SymbolInfo symbolInfo : symbols.asList()) {
                 adjacentNumbers.addAll(getAdjacentNumbers(lineIndex, symbolInfo));
             }
         }
         adjacentNumbers.stream()
-                .filter(numberInfo -> numberInfo.lineIndex() == 0)
+//                .filter(numberInfo -> numberInfo.lineIndex() == 0)
                 .sorted(Comparator.comparingInt(NumberInfo::startIndex))
                 .forEach(System.out::println);
         return adjacentNumbers
                 .stream()
-                .mapToInt(NumberInfo::number)
+                .mapToLong(NumberInfo::number)
                 .sum();
+    }
+
+    public long getGearsSum() {
+        List<Integer> gears = new ArrayList<>();
+        for (int lineIndex = 0; lineIndex < lines.size(); lineIndex++) {
+            var symbols = getSymbols(lineIndex).asList().stream()
+                    .filter(symbolInfo -> symbolInfo.symbol().equals("*"))
+                    .toList();
+            for (SymbolInfo symbolInfo : symbols) {
+                var adjacentNumbersToSymbol = getAdjacentNumbers(lineIndex, symbolInfo);
+                if (adjacentNumbersToSymbol.size() == 2) {
+                    gears.add(adjacentNumbersToSymbol.stream()
+                            .mapToInt(NumberInfo::number)
+                            .reduce(1, (a, b) -> a * b));
+                }
+            }
+        }
+        return gears
+                .stream()
+                .mapToLong(Integer::longValue)
+                .sum();
+    }
+
+    public static void main(String[] args) {
+        var engineSchematic = new EngineSchematic(Input.TEXT);
+        System.out.println(engineSchematic.getNumbersSum());
     }
 }

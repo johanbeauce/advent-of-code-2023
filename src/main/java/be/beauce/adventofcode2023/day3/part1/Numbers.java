@@ -6,14 +6,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Numbers {
-    private final List<NumberInfo> numbers;
+    private final List<NumberInfo> numberList;
 
     public Numbers(int lineIndex, String line) {
-        this.numbers = findNumbers(lineIndex, line);
+        this.numberList = findNumbers(lineIndex, line);
     }
 
     public int size() {
-        return numbers.size();
+        return numberList.size();
     }
 
     private List<NumberInfo> findNumbers(int lineIndex, String line) {
@@ -30,7 +30,7 @@ public class Numbers {
     }
 
     public List<NumberInfo> asList() {
-        return numbers;
+        return numberList;
     }
 
 }
