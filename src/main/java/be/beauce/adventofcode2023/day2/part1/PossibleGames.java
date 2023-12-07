@@ -42,21 +42,6 @@ public class PossibleGames {
         return ballSumPerGame.get(gameNumber).get(ball);
     }
 
-    public Integer getSumOfValidGames(Map<BallColor, Integer> maxBallNumbers) {
-        int validGamesTotal = 0;
-        for (Map.Entry<Integer, Map<BallColor, Integer>> gameIndexEntry : ballSumPerGame.entrySet()) {
-            var gameBallNumbers = gameIndexEntry.getValue();
-            System.out.println("game " + gameIndexEntry.getKey() + " " + gameBallNumbers);
-            if (noTooMuchRedBalls(maxBallNumbers, gameBallNumbers)
-                    && noTooMuchGreen(maxBallNumbers, gameBallNumbers)
-                    && noTooMuchBlue(maxBallNumbers, gameBallNumbers)) {
-                System.out.println("Game " + gameIndexEntry.getKey() + " is valid");
-                validGamesTotal += gameIndexEntry.getKey();
-            }
-        }
-        return validGamesTotal;
-    }
-
     public Integer getSumOfValidGamesByMax(Map<BallColor, Integer> maxBallNumbers) {
         int validGamesTotal = 0;
         for (Map.Entry<Integer, Map<BallColor, Integer>> gameIndexEntry : maxBallsPerGame.entrySet()) {
@@ -94,23 +79,5 @@ public class PossibleGames {
             System.out.println("\tToo much blue balls");
         }
         return isBlueOk;
-    }
-
-    class BallNumber {
-        private final BallColor ball;
-        private final int number;
-
-        public BallNumber(BallColor ball) {
-            this.ball = ball;
-            this.number = 0;
-        }
-
-        public BallColor getBall() {
-            return ball;
-        }
-
-        public int getNumber() {
-            return number;
-        }
     }
 }

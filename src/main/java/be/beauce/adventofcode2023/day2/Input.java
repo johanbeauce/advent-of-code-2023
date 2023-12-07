@@ -1,4 +1,4 @@
-package be.beauce.adventofcode2023.day2.part1;
+package be.beauce.adventofcode2023.day2;
 
 public class Input {
     public static String GAMES = """

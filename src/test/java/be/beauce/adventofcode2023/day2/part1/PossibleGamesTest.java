@@ -1,5 +1,6 @@
 package be.beauce.adventofcode2023.day2.part1;
 
+import be.beauce.adventofcode2023.day2.Input;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
