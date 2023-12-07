@@ -1,4 +1,4 @@
-package be.beauce.adventofcode2023.day1.part1;
+package be.beauce.adventofcode2023.day1;
 
 public class Input {
     public static String TEXT = """
