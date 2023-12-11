@@ -1,6 +1,7 @@
-package be.beauce.adventofcode2023.day7.part1;
+package be.beauce.adventofcode2023.day7;
 
 public class Input {
+
     public static String TEXT = """
             757T6 637
             TTT2T 589

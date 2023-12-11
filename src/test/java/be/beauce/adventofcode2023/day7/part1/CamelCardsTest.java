@@ -1,5 +1,7 @@
 package be.beauce.adventofcode2023.day7.part1;
 
+import be.beauce.adventofcode2023.day7.CardType;
+import be.beauce.adventofcode2023.day7.Hand;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CamelCardsTest {
 
@@ -58,7 +59,9 @@ class CamelCardsTest {
     @Test
     void hand_compare() {
         var compare = camelCards.getHands().get(1).compareTo(camelCards.getHands().get(4));
-        assertThat(compare).isEqualTo(-1);
+        assertThat(compare).isEqualTo(1);
+        assertThat("a".compareTo("b")).isEqualTo(-1);
+
     }
 
     @Test

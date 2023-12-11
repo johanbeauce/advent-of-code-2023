@@ -1,4 +1,4 @@
-package be.beauce.adventofcode2023.day7.part1;
+package be.beauce.adventofcode2023.day7;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -10,7 +10,7 @@ public enum CardType {
     THREE(4, CardType::hasThree),
     TWO(5, CardType::hasTwo),
     ONE(6, CardType::hasPair),
-    HIGH(6, CardType::isAllDifferent);
+    HIGH(7, CardType::isAllDifferent);
 
     private static boolean havFiveCardInCommon(List<String> cards) {
         return cards.stream().distinct().count() == 1;
@@ -61,5 +61,9 @@ public enum CardType {
             }
         }
         throw new IllegalArgumentException("No card type found for " + cards);
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

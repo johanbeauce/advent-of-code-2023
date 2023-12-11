@@ -1,8 +1,8 @@
-package be.beauce.adventofcode2023.day7.part1;
+package be.beauce.adventofcode2023.day7;
 
 import java.util.List;
 
-public final class Hand {
+public class Hand {
     private static final List<String> CARDS_POWER = List.of("A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2");
 
     private final List<String> cards;

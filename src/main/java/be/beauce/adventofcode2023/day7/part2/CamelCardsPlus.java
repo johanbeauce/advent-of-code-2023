@@ -1,26 +1,26 @@
-package be.beauce.adventofcode2023.day7.part1;
+package be.beauce.adventofcode2023.day7.part2;
 
-import be.beauce.adventofcode2023.day7.Hand;
 import be.beauce.adventofcode2023.day7.Input;
+import be.beauce.adventofcode2023.day7.JokerHand;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CamelCards {
-    private final List<Hand> hands;
+public class CamelCardsPlus{
+    private final List<JokerHand> hands;
 
-    public List<Hand> getHands() {
+    public List<JokerHand> getHands() {
         return hands;
     }
 
-    public CamelCards(String input) {
+    public CamelCardsPlus(String input) {
         this.hands = new ArrayList<>();
         var lines = input.split("\n");
         for (var line : lines) {
             var split = line.split(" ");
             var card = split[0].trim();
             var bid = split[1].trim();
-            hands.add(new Hand(transformToListOfString(card), Long.parseLong(bid)));
+            hands.add(new JokerHand(transformToListOfString(card), Long.parseLong(bid)));
         }
     }
 
@@ -33,26 +33,25 @@ public class CamelCards {
     }
 
     public long getTotalWinnings() {
-        var sortedHands = getHandList();
+        var sortedHands = getSortedHands();
 
         long sum = 0;
         long rank = sortedHands.size();
         for (int i = 0; i < sortedHands.size(); i++) {
-            sum += sortedHands.get(i).bid() * rank;
+            sum += sortedHands.get(i).getBid() * rank;
             rank--;
         }
         return sum;
     }
 
-    private List<Hand> getHandList() {
+    public List<JokerHand> getSortedHands() {
         return hands.stream()
-                .sorted(Hand::compareTo)
+                .sorted(JokerHand::compareTo)
                 .toList();
     }
 
     public static void main(String[] args) {
-        // 249390788
-        var camelCards = new CamelCards(Input.TEXT);
-        System.out.println(camelCards.getTotalWinnings());
+        var camelCardsPlus = new CamelCardsPlus(Input.TEXT);
+        System.out.println(camelCardsPlus.getTotalWinnings());
     }
 }
